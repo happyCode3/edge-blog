@@ -1,213 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
+@layout('layout.common')
 
-<head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+@section('page-content')
 
-  <title>Blog Home - Start Bootstrap Template</title>
-  <script src="/vendor/jquery/jquery.min.js"></script>
+<h1 class="my-4">Create Post
+    <small>what's on your mind</small>
+  </h1>
 
-  <!-- Bootstrap core CSS -->
-  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <p id="warning" style="display:none; color:red"> দয়া করে সবগুলো ফর্ম ভরুন </p>
 
-  <!-- Custom styles for this template -->
-  <link href="/css/blog-home.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-</head>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Start Bootstrap</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
+  <!-- Blog Post -->
+  <form method="post" action="create-post" enctype="multipart/form-data">
+      <span>Title</span>
+      <br>
+      <input  type="name" required="" maxlength="50" name="title" />
+      <br>
+      <span>Body</span>
+     <br>
+      <textarea type="name" class="form-control" name="body" id="body" rows="3"></textarea>
+      <br>
+      <span>set image</span>
+      <div class="custom-file">  
+          <input type="file" class="custom-file-input" required="" name="image" id="customFile">
+          <label class="custom-file-label" for="customFile"> Post image </label>
       </div>
-    </div>
-  </nav>
-
-  <!-- Page Content -->
-  <div class="container">
-
-    <div class="row">
-
-      <!-- Blog Entries Column -->
-      <div class="col-md-8">
-
-        <h1 class="my-4">Create Post
-          <small>what's on your mind</small>
-        </h1>
-
-        <p id="warning" style="display:none; color:red"> দয়া করে সবগুলো ফর্ম ভরুন </p>
-
-        <!-- Blog Post -->
-        <form method="post" action="post" enctype="multipart/form-data">
-            <span>Title</span>
-            <br>
-            <input  type="name" required="" maxlength="50" name="title" />
-            <br>
-            <span>Body</span>
-           <br>
-            <textarea type="name" class="form-control" name="body" id="body" rows="3"></textarea>
-            <br>
-            <span>set image</span>
-            <div class="custom-file">  
-                <input type="file" class="custom-file-input" name="image" id="customFile">
-                <label class="custom-file-label" for="customFile"> Post image </label>
-            </div>
-         
-            <img style="object-fit: cover; display:none" class="card-img-top" id="blah" src="#"  alt="bla bla" height="400px">
-            <br>
-            <button class="btn btn-primary" type="submit">post</button>
-        </form>
-
-  
-
-       
-        <script>
-            // Add the following code if you want the name of the file appear on select
-            
-            function readURL(input) {
-              
-              if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                
-                reader.onload = function(e) {
-                  $('#blah').attr('src', e.target.result)
-                  $('#blah').css("display","block");
-                
-                }
-                
-                reader.readAsDataURL(input.files[0]);
-              }
-            }
-
-            $("#customFile").change(function() {
-              readURL(this);
-            });
-
-            let title = $('#title').val();
-            let body = $('#body').val();
-            let image = document.querySelector('#customFile');
-
-            // //from checker 
-            // $('#post').on('click', function(){
-               
-            //    $('#warning').css('display','none')
-            //    axios({method:'post',url:'/posts', data:{title:'title'}})
-
-            // })
-
-          </script>
    
-
+      <img style="object-fit: cover; display:none" class="card-img-top" id="blah" src="#"  alt="bla bla" height="400px">
+      <br>
+      <div style="margin-top:30px">
+        <a style="" href="/" class="btn btn-danger">cancel </a>
+        <button class="btn btn-primary" type="submit">post</button>
       </div>
+  </form>
 
 
 
-      <!-- Sidebar Widgets Column -->
-      <div class="col-md-4">
+ 
+  <script>
+      // Add the following code if you want the name of the file appear on select
+      
+      function readURL(input) {
+        
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          
+          reader.onload = function(e) {
+            $('#blah').attr('src', e.target.result)
+            $('#blah').css("display","block");
+          
+          }
+          
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
 
-        <!-- Search Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Search</h5>
-          <div class="card-body">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Go!</button>
-              </span>
-            </div>
-          </div>
-        </div>
+      $("#customFile").change(function() {
+        readURL(this);
+      });
 
-        <!-- Categories Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Categories</h5>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">Web Design</a>
-                  </li>
-                  <li>
-                    <a href="#">HTML</a>
-                  </li>
-                  <li>
-                    <a href="#">Freebies</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">JavaScript</a>
-                  </li>
-                  <li>
-                    <a href="#">CSS</a>
-                  </li>
-                  <li>
-                    <a href="#">Tutorials</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+      let title = $('#title').val();
+      let body = $('#body').val();
+      let image = document.querySelector('#customFile');
 
-        <!-- Side Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Side Widget</h5>
-          <div class="card-body">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-          </div>
-        </div>
+      // //from checker 
+      // $('#post').on('click', function(){
+         
+      //    $('#warning').css('display','none')
+      //    axios({method:'post',url:'/posts', data:{title:'title'}})
 
-      </div>
+      // })
 
-    </div>
-    <!-- /.row -->
+    </script>
 
-  </div>
-  <!-- /.container -->
 
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
-    </div>
-    <!-- /.container -->
-  </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="/vendor/jquery/jquery.min.js"></script>
-  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-</body>
 
-</html>
+
+@endsection
