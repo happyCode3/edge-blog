@@ -1,5 +1,6 @@
 const express = require('express');
 const Sequelize = require('sequelize');
+const sequelize = require('./models');
 const Post = require('./models').Post;
 const {config, engine} = require('express-edge')
 const bodyParser = require('body-parser')
@@ -37,7 +38,14 @@ app.use(bodyParser.urlencoded({
 
 
 app.get('/',(req,res)=>{
-   res.render('index')
+   let data;
+   Post.findAll()
+            .then(users => {
+               data = JSON.parse(JSON.stringify(users, null, 4));
+               console.log(data)
+               res.render('index', {data})
+         })
+   
 })
 app.get('/update',(req,res)=>{
     res.render('update')
@@ -49,8 +57,11 @@ app.get('/update',(req,res)=>{
  })
 
  app.post('/post', upload.single('image'),(req,res)=>{
-    console.log(req.image, req.body.title)
+    let {title,body} = req.body;
+      Post.create({
+        title, body, image:req.image
+      })
    //  res.render('index')
-   res.render('post')
+   res.render('index')
  })
-app.listen(3000,()=>console.log('hoorrey'))
+app.listen(3000,()=>console.log('port open at 3000'))

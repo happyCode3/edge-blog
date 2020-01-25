@@ -62,20 +62,23 @@
         </h1>
 
         <!-- Blog Post -->
-        <div class="card mb-4">
-          <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-          <div style="position:relative" class="card-body">
-            <h2 style="" class="card-title">Post Title</h2>
-            <a style="position:absolute;top:15px;right:120px" href="#" class="btn btn-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
-            <a style="position:absolute; top:15px; right:10px;color:#fff" href="/update" class="btn btn-warning">Update <i class="fa fa-pencil"></i> </a>
-            <p style="float:none" class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-          </div>
-          <div class="card-footer text-muted">
-            Posted on January 1, 2017 by
-            <a href="#">Start Bootstrap</a>
-          </div>
-        </div>
+        @each(post in data)
 
+          <div class="card mb-4">
+            <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+            <div style="position:relative" class="card-body">
+              <h2 style="" class="card-title">{{post.title}}</h2>
+              <a style="position:absolute;top:15px;right:120px" href="#" class="btn btn-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
+              <a style="position:absolute; top:15px; right:10px;color:#fff" href="/update" class="btn btn-warning">Update <i class="fa fa-pencil"></i> </a>
+              <p style="float:none" class="card-text">{{post.body}}</p>
+            </div>
+            <div class="card-footer text-muted">
+              Posted on {{ post.createdAt }} || Post Updated on {{post.updatedAt}}
+            </div>
+          </div>
+
+          @endeach
+      
 
 
       </div>
